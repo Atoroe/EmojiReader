@@ -70,7 +70,7 @@ class EmojiTableViewController: UITableViewController {
          */
     }
     
-    // настраиваем какие действия должна делать наша EditingStyle при тапе
+    // настраиваем какие действия должна делать наша EditingStyle при тапе и свайпе
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             objects.remove(at: indexPath.row)
@@ -92,6 +92,48 @@ class EmojiTableViewController: UITableViewController {
         objects.insert(movedEmoji, at: destinationIndexPath.row) //вставили удаленный элемент в новое место назначения по destinationIndexPath
         tableView.reloadData() //перезашружаем таблицу
         
+    }
+    
+    //MARK: -  добавляем кастомные кнопки ячейке при свайпе
+    /* есть trailingSwipe... для отображения справа
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        <#code#>
+    }
+    */
+    //метод возвращает массив экшенов
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let done = doneAction(at: indexPath)
+        let favourite = favouriteAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [done, favourite])
+    }
+    
+    //создаю doneAction для массива UISwipeActionsConfiguration
+    func doneAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(
+            style: .destructive, //как булет выглядеть ячейка (удалится или в нормальном состоянии останется)
+            title: "Done" ) { (action, view, complition) in
+            self.objects.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            complition(true) //означает что на данном этапе действия с кнопкой завершаться и ничего происходить не будет в данной фукции
+        }
+        action.backgroundColor = .systemGreen
+            action.image = UIImage(systemName: "checkmark.circle") //если картинки не будет, то высветится title "Done"
+        return action
+    }
+    
+    // создаю fovouriteAction для массива UISwipeActionsConfiguration
+    func favouriteAction(at indexPath: IndexPath) -> UIContextualAction {
+        var object = objects[indexPath.row] //находим данные обхекта ячейки
+        let action = UIContextualAction(
+            style: .normal,
+            title: "Favoirite") { (actiom, view, complition) in
+            object.isFavourite.toggle()
+            self.objects[indexPath.row] = object
+            complition(true)
+        }
+        action.backgroundColor = object.isFavourite ? .systemPurple : .systemGray
+        action.image = UIImage(systemName: "heart")
+        return action
     }
     
     
