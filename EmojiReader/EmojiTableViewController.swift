@@ -8,6 +8,8 @@
 import UIKit
 
 class EmojiTableViewController: UITableViewController {
+    
+    let objects = Emoji.getEmojis()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,25 +23,21 @@ class EmojiTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//         1
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        objects.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "emojiCell", for: indexPath) as! EmojiTableViewCell
+        let object = objects[indexPath.row]
+        cell.setCell(from: object)
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
