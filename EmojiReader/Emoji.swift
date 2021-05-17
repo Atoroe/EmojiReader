@@ -10,6 +10,7 @@ struct Emoji {
     var name: String
     var description: String
     var isFavourite: Bool
+    var new: Optional<Int> = nil
 }
 
 extension Emoji {
