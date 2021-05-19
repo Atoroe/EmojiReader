@@ -63,6 +63,7 @@
                                     <outlet property="descriptionLabel" destination="QFr-X7-DPB" id="tws-6Z-aYd"/>
                                     <outlet property="emojiLabel" destination="Luc-iw-6HK" id="E04-0L-Vhu"/>
                                     <outlet property="nameLabel" destination="1PG-CD-JAN" id="EBT-fL-HZe"/>
+                                    <segue destination="VNq-fY-b2s" kind="show" identifier="editEmoji" id="Iri-Ve-ZO8"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -134,6 +135,9 @@
                                                     <rect key="frame" x="16" y="0.0" width="382" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textChanged:" destination="SAZ-GE-39O" eventType="editingChanged" id="0MI-SU-16J"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -159,6 +163,9 @@
                                                     <rect key="frame" x="16" y="0.0" width="382" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textChanged:" destination="SAZ-GE-39O" eventType="editingChanged" id="YVo-sE-5Lw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -180,10 +187,14 @@
                     <navigationItem key="navigationItem" id="gho-t5-WlK">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FhT-ie-lZY">
                             <connections>
-                                <action selector="caselItemTapped:" destination="SAZ-GE-39O" id="9Lv-8G-KO7"/>
+                                <segue destination="yEv-EY-fsi" kind="unwind" unwindAction="unwindSegueWithSegue:" id="Mlh-K1-5Zc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="H7s-TO-96q"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="H7s-TO-96q">
+                            <connections>
+                                <segue destination="yEv-EY-fsi" kind="unwind" identifier="saveSegue" unwindAction="unwindSegueWithSegue:" id="ORv-Cg-EGi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="HZo-qm-6xR" id="fI5-rt-tDv"/>
@@ -193,6 +204,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1t-TQ-DCq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="yEv-EY-fsi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2544.9275362318845" y="6.6964285714285712"/>
         </scene>
@@ -234,6 +246,9 @@
             <point key="canvasLocation" x="1710" y="7"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Iri-Ve-ZO8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

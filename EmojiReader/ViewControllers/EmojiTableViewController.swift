@@ -24,9 +24,9 @@ class EmojiTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     /* если одна секция то можно удалить метод
-       override func numberOfSections(in tableView: UITableView) -> Int {
-             1
-       }
+     override func numberOfSections(in tableView: UITableView) -> Int {
+     1
+     }
      */
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,16 +41,16 @@ class EmojiTableViewController: UITableViewController {
     }
     
     /* Настройка стандартной ячейки через defaultContentConfiguration()
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "сell", for: indexPath)
-        let object = objects[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = object.name
-        content.secondaryText = object.description
-        cell.contentConfiguration = content
-        return cell
-    }
-    */
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "сell", for: indexPath)
+     let object = objects[indexPath.row]
+     var content = cell.defaultContentConfiguration()
+     content.text = object.name
+     content.secondaryText = object.description
+     cell.contentConfiguration = content
+     return cell
+     }
+     */
     
     //MARK: - Table view delegate
     
@@ -62,11 +62,11 @@ class EmojiTableViewController: UITableViewController {
         .delete // "удалить" установлен по дефолту
         
         /* возвращаем несколько стилей
-        if indexPath.row % 2 == 0 {
-            return .delete
-        } else {
-            return .insert
-        }
+         if indexPath.row % 2 == 0 {
+         return .delete
+         } else {
+         return .insert
+         }
          */
     }
     
@@ -96,10 +96,10 @@ class EmojiTableViewController: UITableViewController {
     
     //MARK: -  добавляем кастомные кнопки ячейке при свайпе
     /* есть trailingSwipe... для отображения справа
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        <#code#>
-    }
-    */
+     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     <#code#>
+     }
+     */
     //метод возвращает массив экшенов
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let done = doneAction(at: indexPath)
@@ -111,13 +111,13 @@ class EmojiTableViewController: UITableViewController {
     func doneAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(
             style: .destructive, //как булет выглядеть ячейка (удалится или в нормальном состоянии останется)
-            title: "Done" ) { (action, view, complition) in
+            title: "Done" ) { (_, _, isDone) in
             self.objects.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            complition(true) //означает что на данном этапе действия с кнопкой завершаться и ничего происходить не будет в данной фукции
+            isDone(true) //означает что на данном этапе действия с кнопкой завершаться и ничего происходить не будет в данной фукции
         }
         action.backgroundColor = .systemGreen
-            action.image = UIImage(systemName: "checkmark.circle") //если картинки не будет, то высветится title "Done"
+        action.image = UIImage(systemName: "checkmark.circle") //если картинки не будет, то высветится title "Done"
         return action
     }
     
@@ -126,15 +126,44 @@ class EmojiTableViewController: UITableViewController {
         var object = objects[indexPath.row] //находим данные обхекта ячейки
         let action = UIContextualAction(
             style: .normal,
-            title: "Favoirite") { (actiom, view, complition) in
+            title: "Favoirite") { (_, _, isDone) in
             object.isFavourite.toggle()
             self.objects[indexPath.row] = object
-            complition(true)
+            isDone(true)
         }
         action.backgroundColor = object.isFavourite ? .systemPurple : .systemGray
         action.image = UIImage(systemName: "heart")
         return action
     }
     
+    //MARK: - Navigation
+    //настрока кнопок save и edit на втором экране
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveSegue" else { return }
+        guard let newEmojiVC = segue.source as? NewEmojiTableViewController else { return }
+        let emoji = newEmojiVC.emoji
+        
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            objects[selectedIndexPath.row] = emoji
+            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+        } else {
+            let indexPath = IndexPath(row: objects.count, section: 0)
+            objects.append(emoji)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "editEmoji" else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let emoji = objects[indexPath.row]
+        let navigationVC = segue.destination as! UINavigationController
+        guard let newEmojiVC = navigationVC.topViewController as? NewEmojiTableViewController else { return
+        }
+        newEmojiVC.emoji = emoji
+        newEmojiVC.title = "Edit"
+        
+        
+    }
     
 }

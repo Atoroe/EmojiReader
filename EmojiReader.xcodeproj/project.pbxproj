@@ -64,19 +64,75 @@
 		E366B6882651ABD9006071F6 /* EmojiReader */ = {
 			isa = PBXGroup;
 			children = (
-				E366B6A426526F92006071F6 /* EmojiTableViewCell.swift */,
-				E366B6892651ABD9006071F6 /* AppDelegate.swift */,
-				E366B68B2651ABD9006071F6 /* SceneDelegate.swift */,
-				E366B69E2651ADCF006071F6 /* EmojiTableViewController.swift */,
-				E366B68F2651ABD9006071F6 /* Main.storyboard */,
-				E366B6922651ABDE006071F6 /* Assets.xcassets */,
-				E366B6942651ABDE006071F6 /* LaunchScreen.storyboard */,
-				E366B6972651ABDE006071F6 /* Info.plist */,
-				E366B6A82652768C006071F6 /* Emoji.swift */,
-				E366B6AB26527789006071F6 /* EmojiManager.swift */,
-				E366B6AE2652E83B006071F6 /* NewEmojiTableViewController.swift */,
+				E366B6B726551566006071F6 /* Services */,
+				E366B6B42655155D006071F6 /* Models */,
+				E366B6B226551553006071F6 /* Views */,
+				E366B6B12655153C006071F6 /* ViewControllers */,
+				E366B6BA26551595006071F6 /* Storyboards */,
+				E366B6BC26551661006071F6 /* Supporting */,
+				E366B6B926551581006071F6 /* Resources */,
 			);
 			path = EmojiReader;
+			sourceTree = "<group>";
+		};
+		E366B6B12655153C006071F6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E366B69E2651ADCF006071F6 /* EmojiTableViewController.swift */,
+				E366B6AE2652E83B006071F6 /* NewEmojiTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E366B6B226551553006071F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E366B6A426526F92006071F6 /* EmojiTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E366B6B42655155D006071F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E366B6A82652768C006071F6 /* Emoji.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E366B6B726551566006071F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E366B6AB26527789006071F6 /* EmojiManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E366B6B926551581006071F6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E366B6922651ABDE006071F6 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E366B6BA26551595006071F6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E366B68F2651ABD9006071F6 /* Main.storyboard */,
+				E366B6942651ABDE006071F6 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E366B6BC26551661006071F6 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				E366B6892651ABD9006071F6 /* AppDelegate.swift */,
+				E366B68B2651ABD9006071F6 /* SceneDelegate.swift */,
+				E366B6972651ABDE006071F6 /* Info.plist */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,7 +360,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2SK72H5U39;
-				INFOPLIST_FILE = EmojiReader/Info.plist;
+				INFOPLIST_FILE = EmojiReader/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,7 +379,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2SK72H5U39;
-				INFOPLIST_FILE = EmojiReader/Info.plist;
+				INFOPLIST_FILE = EmojiReader/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
